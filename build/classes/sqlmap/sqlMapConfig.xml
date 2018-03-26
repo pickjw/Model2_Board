@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  xml을 만들기 위해 DTD를 추가해 줍니다. -->
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+
+	  <!--알리아스 설정
+        SQL이 선언되어 있는 xml( ibatis에서는 SqlMap이라고 불렀지만, myBatis에서는 
+        mapper 라고 불리고 있습니다)에서 사용할 VO객체의 별명을 붙여 줍니다.
+ 
+           기존의 ibatis에서는 해당설정이 SqlMap쪽에 존재 했던 반면 myBatis에서는 설정쪽으로
+           이동한 것이 달라진 점이라 하겠네요~^^ -->
+       <!-- typeAlias  type="전체경로" alias="별칭"-->
+       <!--  <typeAlias type="net.mybatis.tutorial.vo.MybatisVO" alias="Mybatis" /> -->
+    <typeAliases>
+   		<typeAlias type="page.dto.EmpDTO" alias="e"/>
+    </typeAliases>
+
+	 <!-- db연결 참조코드 (context.xml과 연결됨)-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="JNDI"><!-- context.xml 의   name="jdbc/Oracle11g" 과 value=>같아야함jdbc/Oracle11g -->
+                <property name="data_source" value="java:comp/env/jdbc/Oracle11g" />
+            </dataSource>
+        </environment>
+    </environments>
+
+ 	<!-- 실제 sql쿼리 mapper.xml은 실질적으로 query문이 선언되어 있는 부분입니다. -->
+ 	<!--  
+ 	Mapped Statements collection does not contain value for guestbook.gbList 에러 메세지
+ 	<mapper resource="guestbook/mapper/guestbook.xml" /> 추가 시키기
+ 	-->
+    <mappers>
+        <mapper resource="memo/mapper/memo.xml" />
+        <mapper resource="guestbook/mapper/guestbook.xml" />
+        <mapper resource="page/mapper/emp.xml" />
+        <mapper resource="board/mapper/board.xml" />
+    </mappers>
+</configuration>
+
+
+
+
+
+    
